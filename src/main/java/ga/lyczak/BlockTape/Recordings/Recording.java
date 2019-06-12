@@ -6,6 +6,8 @@ import java.util.LinkedList;
 
 public abstract class Recording<S extends Snapshot> {
     protected LinkedList<S> snapshots;
+
+
     protected boolean finishedRecording;
 
     public Recording() {
@@ -14,5 +16,5 @@ public abstract class Recording<S extends Snapshot> {
 
     public abstract boolean startRecording();
 
-    public abstract Tape<S> stopRecording();
+    public abstract void stopRecording();
 }

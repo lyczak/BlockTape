@@ -7,11 +7,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.LinkedList;
 
 public abstract class SnapshotTask<S extends Snapshot> extends BukkitRunnable {
-    protected final JavaPlugin plugin;
+
     protected LinkedList<S> snapshots;
 
-    public SnapshotTask(JavaPlugin plugin, LinkedList<S> snapshots) {
-        this.plugin = plugin;
+    public SnapshotTask(LinkedList<S> snapshots) {
         this.snapshots = snapshots;
     }
 }

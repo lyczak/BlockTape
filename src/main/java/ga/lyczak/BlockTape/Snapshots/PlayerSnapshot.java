@@ -12,4 +12,9 @@ public class PlayerSnapshot extends Snapshot {
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    @Override
+    public String toString(){
+        return location.getBlock().toString();
+    }
 }
