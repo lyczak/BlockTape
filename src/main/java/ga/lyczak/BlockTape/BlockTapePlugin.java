@@ -1,6 +1,7 @@
 package ga.lyczak.BlockTape;
 
 import co.aikar.commands.PaperCommandManager;
+import ga.lyczak.BlockTape.Commands.PlayBack;
 import ga.lyczak.BlockTape.Commands.Record;
 import ga.lyczak.BlockTape.Commands.ViewRecordings;
 import ga.lyczak.BlockTape.Recordings.Tape;
@@ -55,6 +56,7 @@ public class BlockTapePlugin extends JavaPlugin {
 
         commandManager.registerCommand(new Record());
         commandManager.registerCommand(new ViewRecordings());
+        commandManager.registerCommand(new PlayBack());
         //getLogger().info("Registered record command");
     }
 

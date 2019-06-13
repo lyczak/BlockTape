@@ -17,4 +17,8 @@ public class Tape<S extends Snapshot> {
         }
         return s;
     }
+
+    public LinkedList<S> getSnapshots() {
+        return snapshots;
+    }
 }
