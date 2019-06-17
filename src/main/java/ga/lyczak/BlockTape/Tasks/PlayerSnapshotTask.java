@@ -25,6 +25,7 @@ public class PlayerSnapshotTask extends SnapshotTask<PlayerSnapshot> {
         if(recordTime > 0) {
             PlayerSnapshot s = new PlayerSnapshot();
             s.setLocation(target.getLocation());
+            s.setPlayer(target);
             snapshots.add(s);
             recordTime--;
         }
