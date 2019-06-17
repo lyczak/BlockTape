@@ -25,10 +25,11 @@ public class PlayBackEntityTapeTask extends BukkitRunnable {
     }
     @Override
     public void run() {
-        Location startLocation = snapshots.get(0).getLocation();
+
         EntityType entityType = snapshots.get(0).getEntity().getType();
         if(entityType != EntityType.DROPPED_ITEM) {
             if (currentIndex == 0) {
+                Location startLocation = snapshots.get(0).getLocation();
                 this.entity = startLocation.getWorld().spawnEntity(startLocation, entityType);
                 entity.teleport(startLocation);
                 currentIndex++;
