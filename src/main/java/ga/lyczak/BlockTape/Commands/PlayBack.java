@@ -6,6 +6,7 @@ import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Subcommand;
 import ga.lyczak.BlockTape.BlockTapePlugin;
+import ga.lyczak.BlockTape.Recordings.Scene;
 import ga.lyczak.BlockTape.Recordings.Tape;
 import ga.lyczak.BlockTape.Snapshots.Snapshot;
 import ga.lyczak.BlockTape.Tasks.PlayBackPlayerTapeTask;
@@ -30,11 +31,10 @@ public class PlayBack extends BaseCommand {
                 player.sendRawMessage("Please input a number to indicate the recording you would like to play back");
             }
         }
-        LinkedList<Tape> tapes = BlockTapePlugin.getTapes();
-        if(numToPlay > 0 && numToPlay < tapes.size() + 1){
-            Tape toPlay = tapes.get(numToPlay - 1);
-            PlayBackPlayerTapeTask playBackPlayerTapeTask = new PlayBackPlayerTapeTask(toPlay);
-            playBackPlayerTapeTask.runTaskTimer(BlockTapePlugin.getInstance(), 1, BlockTapePlugin.TICKS_PER_SNAPSHOT);
+        LinkedList<Scene> scenes = BlockTapePlugin.getScenes();
+        if(numToPlay > 0 && numToPlay < scenes.size() + 1){
+            Scene toPlay = scenes.get(numToPlay - 1);
+            toPlay.run();
 
         }
     }

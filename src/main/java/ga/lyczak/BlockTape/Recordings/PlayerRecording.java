@@ -15,12 +15,15 @@ public class PlayerRecording extends Recording<PlayerSnapshot> {
 
 
     PlayerSnapshotTask playerSnapshotTask;
+    Scene scene;
     LinkedList<PlayerSnapshot> snapshots = new LinkedList<PlayerSnapshot>();
-    public boolean startRecording(Player player) {
+    public boolean startRecording(Scene scene, Player player) {
         BlockTapePlugin blockTapePlugin = BlockTapePlugin.getInstance();
+        this.scene = scene;
         playerSnapshotTask = new PlayerSnapshotTask(snapshots, player, BlockTapePlugin.DEFAULT_RECORD_TIME, this);
         BlockTapePlugin.logMessage("Start Recording");
         playerSnapshotTask.runTaskTimer(blockTapePlugin, 1, BlockTapePlugin.TICKS_PER_SNAPSHOT);
+
         return true;
 
     }
@@ -30,9 +33,8 @@ public class PlayerRecording extends Recording<PlayerSnapshot> {
 
     public void stopRecording() {
         playerSnapshotTask.stop();
-        BlockTapePlugin.logMessage("Stop Recording");
         Tape<PlayerSnapshot> tape = new Tape<PlayerSnapshot>(snapshots);
-        BlockTapePlugin.addTape(tape);
+        scene.addTape(tape);
 
     }
 }

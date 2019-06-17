@@ -1,5 +1,6 @@
 package ga.lyczak.BlockTape.Recordings;
 
+import ga.lyczak.BlockTape.BlockTapePlugin;
 import ga.lyczak.BlockTape.Snapshots.Snapshot;
 
 import java.util.LinkedList;
@@ -16,5 +17,4 @@ public abstract class Recording<S extends Snapshot> {
 
     public abstract boolean startRecording();
 
-    public abstract void stopRecording();
 }

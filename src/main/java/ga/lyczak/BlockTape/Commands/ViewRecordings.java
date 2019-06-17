@@ -5,6 +5,7 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Description;
 import ga.lyczak.BlockTape.BlockTapePlugin;
+import ga.lyczak.BlockTape.Recordings.Scene;
 import ga.lyczak.BlockTape.Recordings.Tape;
 import org.bukkit.entity.Player;
 
@@ -15,7 +16,7 @@ import java.util.LinkedList;
 public class ViewRecordings extends BaseCommand {
     @Default
     public void onView(Player player, String[] args){
-        LinkedList<Tape> tapes = BlockTapePlugin.getTapes();
-        player.chat(tapes.get(0).toString());
+        LinkedList<Scene> scenes = BlockTapePlugin.getScenes();
+
     }
 }
