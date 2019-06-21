@@ -23,7 +23,8 @@ public class Record extends BaseCommand {
     @Subcommand("me")
     public void onRecordMe(Player player, String[] args) {
         Location location = player.getLocation();
-        Collection<Entity> nearbyEntities = location.getWorld().getNearbyEntities(location, 128, 128, 128);
+        int r = BlockTapePlugin.ENTITY_RECORD_RADIUS;
+        Collection<Entity> nearbyEntities = location.getWorld().getNearbyEntities(location, r, r, r);
         Scene scene = new Scene(nearbyEntities);
         BlockTapePlugin.addScene(scene);
 

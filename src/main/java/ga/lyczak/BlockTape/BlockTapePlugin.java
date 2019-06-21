@@ -22,7 +22,8 @@ public class BlockTapePlugin extends JavaPlugin {
     private static PaperCommandManager commandManager;
 
     public static final int TICKS_PER_SNAPSHOT = 1;
-    public static final int DEFAULT_RECORD_TIME = 20 * 10; //ticks
+    public static final int DEFAULT_RECORD_TIME = 20 * 20; //ticks
+    public static final int ENTITY_RECORD_RADIUS = 128; //blocks
 
     private static LinkedList<Scene> scenes = new LinkedList<>();
 

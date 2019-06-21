@@ -18,50 +18,70 @@ public class PlayBackPlayerTapeTask extends BukkitRunnable {
     private int currentIndex = 0;
     private ArmorStand armorStand;
     private Player player;
-    private EntityEquipment equipment;
-    public PlayBackPlayerTapeTask(Tape<PlayerSnapshot> tape){
+    private boolean isDead;
+
+    public PlayBackPlayerTapeTask(Tape<PlayerSnapshot> tape) {
         snapshots = tape.getSnapshots();
         this.player = snapshots.get(0).getPlayer();
     }
+
     @Override
     public void run() {
-        if(currentIndex >= snapshots.size()){
+        if (currentIndex >= snapshots.size()) {
             armorStand.remove();
             this.cancel();
             return;
         }
         PlayerSnapshot snapshot = snapshots.get(currentIndex);
-        if(currentIndex == 0){
-            Location startLocation = snapshot.getLocation();
-            armorStand = (ArmorStand) startLocation.getWorld().spawnEntity(startLocation, EntityType.ARMOR_STAND);
+        if (currentIndex == 0) {
+            spawn(snapshot.getLocation());
 
-            armorStand.setCustomName(player.getDisplayName());
+            setItems(snapshot);
 
-            ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1,(byte) 3);
-            SkullMeta meta = (SkullMeta) skull.getItemMeta();
-            meta.setOwner(player.getDisplayName());
-            skull.setItemMeta(meta);
-            armorStand.setHelmet(skull);
+        } else if (snapshot.isDead() == isDead) {
+            if (!isDead) {
+                setItems(snapshot);
 
-            armorStand.setGravity(false);
+                teleportStands(snapshot.getLocation());
 
-            armorStand.setBoots(snapshot.getBoots());
-            armorStand.setLeggings(snapshot.getLeggings());
-            armorStand.setChestplate(snapshot.getChestplate());
-            armorStand.setItemInHand(snapshot.getHand());
 
-            currentIndex++;
+            }
+        } else if (isDead) {
+            spawn(snapshot.getLocation());
+
+            setItems(snapshot);
+        } else{
+           armorStand.remove();;
         }
-        else{
-            armorStand.setBoots(snapshot.getBoots());
-            armorStand.setLeggings(snapshot.getLeggings());
-            armorStand.setChestplate(snapshot.getChestplate());
-            armorStand.setItemInHand(snapshot.getHand());
+        isDead = snapshot.isDead();
+        currentIndex++;
+    }
+    private void spawn(Location location){
+        armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
 
-            armorStand.teleport(snapshot.getLocation());
+        armorStand.setCustomName(player.getDisplayName());
 
-            currentIndex++;
-        }
+        ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1,(byte) 3);
+        SkullMeta meta = (SkullMeta) skull.getItemMeta();
+        meta.setOwner(player.getDisplayName());
+        skull.setItemMeta(meta);
+        armorStand.setHelmet(skull);
 
+        armorStand.setVisible(false);
+        armorStand.setGravity(false);
+
+
+    }
+    private void setItems(PlayerSnapshot snapshot){
+        armorStand.setBoots(snapshot.getBoots());
+        armorStand.setLeggings(snapshot.getLeggings());
+        armorStand.setChestplate(snapshot.getChestplate());
+        armorStand.setItemInHand(snapshot.getHand());
+
+
+
+    }
+    private void teleportStands(Location location){
+        armorStand.teleport(location);
     }
 }

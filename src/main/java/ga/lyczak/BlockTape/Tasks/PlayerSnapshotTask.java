@@ -22,7 +22,7 @@ public class PlayerSnapshotTask extends SnapshotTask<PlayerSnapshot> {
 
     public void run() {
         //BlockTapePlugin.getInstance().logMessage("Run");
-        if(recordTime > 0 && !target.isDead()) {
+        if(recordTime > 0) {
             PlayerSnapshot s = new PlayerSnapshot(target, target.getLocation());
             snapshots.add(s);
             recordTime--;
